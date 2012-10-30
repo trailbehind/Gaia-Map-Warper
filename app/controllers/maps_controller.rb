@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
-   layout 'mapdetail', :only => [:show, :edit, :preview, :warp, :clip, :align, :activity, :warped, :export, :metadata, :comments]
+   layout 'mapdetail', :only => [:show, :edit, :preview, :warp, :clip, :align, :activity, :warped, :export, :metadata, :comments, :gaia_url, :otm_url]
   #before_filter :login_required, :only => [:destroy, :delete]
   before_filter :login_or_oauth_required, :only => [:new, :create, :edit, :update, :destroy, :delete, :warp, :rectify, :clip, :align,
  :warp_align, :mask_map, :delete_mask, :save_mask, :save_mask_and_warp, :set_rough_state, :set_rough_centroid ]
@@ -72,6 +72,19 @@ class MapsController < ApplicationController
     end
   end
 
+ def otm_url
+    map = Map.find(params[:id])
+    respond_to do |format|
+        format.text { render :text => "otm://addmapsource/" + CGI::escape(@map.title.to_s + "^^" + url_for(:controller => "maps", :action => "tile", :x => "XPARAM", :y => "YPARAM", :z => "ZPARAM", :only_path => false) + "^^" + @map.gaia_url()) }
+    end
+  end
+
+ def gaia_url
+    map = Map.find(params[:id])
+    respond_to do |format|
+        format.text { render :text => "gaiagps://addmapsource/" + CGI::escape(@map.title.to_s + "^^" + url_for(:controller => "maps", :action => "tile", :x => "XPARAM", :y => "YPARAM", :z => "ZPARAM", :only_path => false) + "^^" + @map.gaia_url()) }
+    end
+  end
 
   def comments
     @html_title = "comments"
@@ -164,10 +177,10 @@ class MapsController < ApplicationController
     end
 
     paginate_params = {
-      :select => "bbox, title, description, updated_at, id",
+      :select => "bbox, title, description, id",
       :page => params[:page],
       :per_page => 20,
-      :order => sort_geo + sort_clause + sort_nulls,
+      :order => sort_geo + sort_clause,
       :conditions => conditions
     }
     @maps = Map.warped.paginate(paginate_params)
@@ -262,7 +275,7 @@ class MapsController < ApplicationController
       paginate_params = {
         :page => params[:page],
         :per_page => 10,
-        :order => sort_clause + sort_nulls,
+        :order => sort_clause,
         :conditions => conditions
       }
 
@@ -899,10 +912,10 @@ end
         @too_few = true
         @notice_text = "Sorry, the map needs at least three control points to be able to rectify it"
         @output = @notice_text
-      elsif @map.status == :warping
-        @fail = true
-        @notice_text = "Sorry, the map is currently being rectified somewhere else, please try again later."
-        @output = @notice_text
+      #elsif @map.status == :warping
+      #  @fail = true
+      #  @notice_text = "Sorry, the map is currently being rectified somewhere else, please try again later."
+      #  @output = @notice_text
       else
         if logged_in?
            um  = current_user.my_maps.new(:map => @map)

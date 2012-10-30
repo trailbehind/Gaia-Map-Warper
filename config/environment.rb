@@ -1,3 +1,5 @@
+
+
 # Be sure to restart your server when you modify this file
 
 # Uncomment below to force Rails into production mode when
@@ -8,6 +10,7 @@ ENV['RAILS_ENV'] ||= 'production'
 RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
+require 'thread'
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
@@ -30,7 +33,7 @@ Rails::Initializer.run do |config|
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
-  # config.log_level = :debug
+  config.log_level = :debug
 
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.

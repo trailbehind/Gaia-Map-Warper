@@ -254,6 +254,18 @@ class Map < ActiveRecord::Base
     self.unwarped_filename + "_masked";
   end
 
+  def gaia_url
+    #sourceTag = name + "^^" + url + "^^" + str(minZoom) + "^^" + str(maxZoom) + "^^Google^^" + uniqueID + "^^"
+    #sourceTag = sourceTag + str(maxLat) + "^^" + str(maxLon) + "^^" + str(minLat) + "^^" + str(minLon) + "^^"
+    #sourceTag  = sourceTag +  uniqueID + "^^2302147642.000000"
+    extents = get_raster_extents self.warped_filename 
+    sourceTag = "0" + "^^" "15" + "^^Google^^" + self.title.to_s + "^^"
+    sourceTag = sourceTag + extents[3].to_s + "^^" + extents[2].to_s + "^^" + extents[1].to_s+ "^^" + extents[0].to_s + "^^"
+    sourceTag = sourceTag + self.title.to_s + "^^2302147642.000000"
+
+    #"gaiagps://addmapsource/" + sourceTag 
+  end
+
 
   #############################################
   #CLASS METHODS
@@ -584,7 +596,7 @@ class Map < ActiveRecord::Base
     memory_limit =  (defined?(GDAL_MEMORY_LIMIT)) ? "-wm "+GDAL_MEMORY_LIMIT.to_s :  ""
 
     #check for colorinterop=pal ? -disnodata 255 or -dstalpha
-    command = "#{GDAL_PATH}gdalwarp #{memory_limit}  #{transform_option}  #{resample_option} -dstalpha #{mask_options} -s_srs 'EPSG:4326' #{temp_filename}.vrt #{dest_filename} -co TILED=YES -co COMPRESS=JPEG -co JPEG_QUALITY=85"
+    command = "#{GDAL_PATH}gdalwarp #{memory_limit}  #{transform_option}  #{resample_option} -dstalpha #{mask_options} -s_srs 'EPSG:4326' #{temp_filename}.vrt #{dest_filename} -co TILED=YES"
     w_stdin, w_stdout, w_stderr = Open3::popen3(command)
     logger.info command
 

@@ -15,6 +15,7 @@ MAP
     METADATA
       "wms_title"     "Map Warper WMS Layer"
       "wms_srs"       "EPSG:4269 EPSG:4326 EPSG:900913"
+      ows_enable_request "*"
     END
   END
 
@@ -39,33 +40,5 @@ MAP
     MIMETYPE "image/tiff"
     IMAGEMODE "BYTE"
     EXTENSION "tif"
-  END
-  OUTPUTFORMAT
-    NAME "png"
-    DRIVER "GD/PNG"
-    IMAGEMODE "rgba"
-    EXTENSION "png"
-    MIMETYPE "image/png"
-    IMAGEMODE RGBA
-    TRANSPARENT on
-  END
-  OUTPUTFORMAT
-    NAME "png8"
-    DRIVER "GD/PNG"
-    IMAGEMODE "rgba"
-    EXTENSION "png"
-    MIMETYPE "image/png"
-    TRANSPARENT on
-    FORMATOPTION "QUANTIZE_FORCE=ON"
-    FORMATOPTION "QUANTIZE_DITHER=ON"
-    FORMATOPTION "QUANTIZE_COLORS=250"
-  END
-  OUTPUTFORMAT
-    NAME "gif"
-    DRIVER "GD/GIF"
-    MIMETYPE "image/gif"
-    IMAGEMODE PC256
-    EXTENSION "gif"
-    TRANSPARENT ON
   END
 END

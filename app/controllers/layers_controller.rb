@@ -96,7 +96,7 @@ class LayersController < ApplicationController
     :select => "bbox, name, updated_at, id, maps_count, rectified_maps_count, depicts_year",
     :page => params[:page],
     :per_page => 20,
-    :order => sort_geo + sort_clause + sort_nulls,
+    :order => sort_geo + sort_clause,
     :conditions => conditions
   }
   @layers = Layer.visible.with_maps.paginate(paginate_params)
@@ -143,7 +143,7 @@ end
       :page => params[:page],
       :per_page => 20,
       :select => select,
-      :order => sort_clause + sort_nulls,
+      :order => sort_clause,
       :conditions => conditions
     }
 

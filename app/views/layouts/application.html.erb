@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title><%= h(@html_title) || ''-%> Map Warper </title>
+    <title><%= h(@html_title) || ''-%> Gaia GPS - Map Warper </title>
 
     <%= yield :head %>
     <%= stylesheet_link_tag "openlayers/theme/default/style" %>
@@ -33,7 +33,7 @@
           <body>
           <%end%>
           <div id="headerDiv" class="headerDiv">
-            <h1><%= link_to "Map Warper <span>beta</span>", root_path %></h1>
+            <h1><%= link_to "Map Warper", root_path %></h1>
             <%= render :partial => 'shared/header' %>
             <%= render :partial => 'shared/nav' %>
           </div>

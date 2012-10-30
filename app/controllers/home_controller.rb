@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @html_title =  "Home - "
 
     #@tags  = Tag.counts(:limit => 60)
-    @tags = Map.tag_counts(:conditions => "public = true", :limit=>100)
+    @tags = Map.tag_counts(:conditions => "", :limit=>100)
     @maps = Map.public.find(:all,
                              :order => "updated_at DESC",
                              :conditions => 'status = 4 OR status IN (2,3,4) ', 

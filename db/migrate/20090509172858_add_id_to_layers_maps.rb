@@ -1,6 +1,6 @@
 class AddIdToLayersMaps < ActiveRecord::Migration
   def self.up
-    add_column :layers_maps, :id, :primary_key
+    add_column :layers_maps, :id, :integer
   end
 
   def self.down
