@@ -1,6 +1,7 @@
 class AddEditorAndAdministratorRole < ActiveRecord::Migration
   def self.up
 
+=begin
     Role.create(:name => 'editor')
     Role.create(:name => 'administrator')
 
@@ -12,7 +13,7 @@ class AddEditorAndAdministratorRole < ActiveRecord::Migration
     permission.role = role
     permission.user = user
     permission.save(false)
-
+=end
   end
 
   def self.down

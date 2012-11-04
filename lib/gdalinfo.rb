@@ -1,4 +1,7 @@
-require 'gdal/gdal'
+#require 'gdal/gdal'
+# use gdal gem instead of system library.
+# https://github.com/zhm/gdal-ruby
+require 'gdal'
 
 def get_raster_extents (filename)
     raster = Gdal::Gdal.open(filename)

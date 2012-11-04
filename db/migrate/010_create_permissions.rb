@@ -4,7 +4,8 @@ class CreatePermissions < ActiveRecord::Migration
       t.integer :role_id, :user_id, :null => false
       t.timestamps
     end
- 
+
+=begin 
 #make sure the role migration was generated first
   #
   Role.create(:name => 'super user')
@@ -26,6 +27,9 @@ class CreatePermissions < ActiveRecord::Migration
   permission.role = role
   permission.user = user
   permission.save(false)
+
+=end
+
 
   end
 
