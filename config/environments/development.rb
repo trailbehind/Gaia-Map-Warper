@@ -13,9 +13,6 @@ MAPSERVER_URL = "/mapserv"  #url to the mapserv executable
 #MAX_ATTACHMENT_SIZE = 100.megabytes
 #GDAL_MEMORY_LIMIT = 30 #in mb
 #
-#for staging.mapwarper.net ABQIAAAAUs2kl_uF_gYL9qSq4yukexSgEqVDyz1BzXtcs2sjYKHX7Ct09xQKZPVFb7DDwZR1l3CCS6uyv18asQ
-#for beta.mapwarper.net
-GOOGLE_MAPS_KEY="ABQIAAAAUs2kl_uF_gYL9qSq4yukexRxkxcYXm5XhASGm0Epb0TXzVu4RRQ76q3JFV3Uf57gZY19BEkCZK2xBA"
 # In the development environment your application's code is reloaded on
 # every request.  This slows down response time but is perfect for development
 # since you don't have to restart the webserver when you make code changes.
