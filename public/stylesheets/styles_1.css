@@ -279,8 +279,21 @@ body
 	margin: 0 0 0 0;
 }
 
-#headerDiv-layer h1 {
-font-size: 2em; margin: .67em 0  !important;
+.headerDiv {
+	color: #FFF;
+}
+
+.headerDiv h1 a {
+	color: #FFF;
+	margin-left: 120px;
+}
+
+.headerDiv h1 a:link, .headerDiv h1 a:visited {
+	color: #FFF;
+}
+
+#nav li {
+	color: #020;
 }
 
  h2 {
