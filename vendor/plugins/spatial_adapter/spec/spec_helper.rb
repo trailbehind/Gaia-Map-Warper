@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'spec'
-gem 'activerecord', '=2.3.5'
+gem 'activerecord', '=2.3.14'
 
 $:.unshift((File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'spatial_adapter'
