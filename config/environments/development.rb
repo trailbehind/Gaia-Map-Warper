@@ -1,5 +1,5 @@
 # Settings specified here will take precedence over those in config/environment.rb
-SITE_URL = "beta.mapwarper.net"
+SITE_URL = "localhost:3000"
 SITE_NAME = "map warper"
 SITE_EMAIL = "robot@mapwarper.net"
 MAPSERVER_URL = "/mapserv"  #url to the mapserv executable

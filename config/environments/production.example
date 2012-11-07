@@ -1,5 +1,5 @@
 # Settings specified here will take precedence over those in config/environment.rb
-SITE_URL = "wrp.geothings.net"
+SITE_URL = "warper.gaiagps.com"
 SITE_NAME = "Map Warper"
 SITE_EMAIL = "robot@geothings.net"
 MAPSERVER_URL = "/cgi/mapserv.cgi"  #url to the mapserv executable
