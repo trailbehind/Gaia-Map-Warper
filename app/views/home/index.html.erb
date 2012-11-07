@@ -22,29 +22,6 @@ Mail use at support@gaiagps.com for more information!
     <%= link_to tag.name, { :controller=>:maps, :action => :tag, :id => tag.name }, :class => css_class %>
   <% end %>
 </div>
-<div id="news">
-  
-<h4 class="smaller">News</h4>
-<% cache "news_feeds" do %>
-<table>
-  <% @feeds.each do |feed| %>
-    <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
-      <td class="list-item">
-        <p>
-          <%= link_to(feed[:title], feed[:link], :title => "click here to read this story", :target => "_blank") %>
-          <br />
-          <span class="news-description">
-            <%= snippet(feed[:description], 30) %>
-            <%= link_to('read more', feed[:link], :title => "read more", :target => "_blank") %>
-          </span>
-        </p>
-      </td>
-    </tr>
-  <% end unless @feeds.nil?%>
-</table>
-<% end %>
-
-</div>
 
 </div>
 <div id="right-col">
