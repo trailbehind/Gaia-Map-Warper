@@ -39,6 +39,7 @@ config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
 	:address  => "smtp.mandrillapp.com",
 	:port     => 587,
+	:domain   => "gaiagps.com",
 	:user_name => "username",
 	:password => "password",
 	:enable_starttls_auto => true
