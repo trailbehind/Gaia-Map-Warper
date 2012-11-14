@@ -1,7 +1,7 @@
 # Settings specified here will take precedence over those in config/environment.rb
 SITE_URL = "localhost:3000"
 SITE_NAME = "map warper"
-SITE_EMAIL = "robot@mapwarper.net"
+SITE_EMAIL = "support@gaiagps.com"
 MAPSERVER_URL = "/mapserv"  #url to the mapserv executable
 
 #paths to directories to put various files in
@@ -32,6 +32,7 @@ config.action_view.debug_rjs                         = true
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+config.action_mailer.delivery_method = :test
 
 #GDAL_PATH  = "/home/tim/bin/FWTools-2.0.6/bin_safe/"
 GDAL_PATH  = ""

@@ -1,7 +1,7 @@
 # Settings specified here will take precedence over those in config/environment.rb
 SITE_URL = "warper.gaiagps.com"
 SITE_NAME = "Map Warper"
-SITE_EMAIL = "robot@geothings.net"
+SITE_EMAIL = "support@gaiagps.com"
 MAPSERVER_URL = "/cgi/mapserv.cgi"  #url to the mapserv executable
 
 #paths to directories to put src files and warped destination files
@@ -33,6 +33,17 @@ config.action_controller.perform_caching             = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+
+config.action_mailer.preform_deliveries = true
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+	:address  => "smtp.mandrillapp.com",
+	:port     => 587,
+	:user_name => "username",
+	:password => "password",
+	:enable_starttls_auto => true
+}
+
 
 GDAL_PATH  = "" #used for FWTools use for example
 GOOGLE_ANALYTICS_CODE = "UA-12240034-1"
