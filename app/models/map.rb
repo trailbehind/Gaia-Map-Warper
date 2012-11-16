@@ -65,8 +65,9 @@ class Map < ActiveRecord::Base
 
   def save_dimensions
     if ["image/jpeg", "image/tiff", "image/png", "image/gif", "image/bmp"].include?(upload.content_type.to_s)
-      self.width = upload.width
-      self.height = upload.height
+      logger.info "Saving image dimensions to #{upload.width.to_s} #{upload.height.to_s}"
+      self.width = upload.width.to_i
+      self.height = upload.height.to_i
     end
     self.status = :available
   end
@@ -88,8 +89,9 @@ class Map < ActiveRecord::Base
           dest_height = MAX_DIMENSION
           dest_width = (dest_height.to_f /  height.to_f) * width.to_f
         end
-        self.width = dest_width
-        self.height = dest_height
+        logger.info "Re-saving image dimensions to #{dest_width.to_s} #{dest_height.to_s}"
+        self.width = dest_width.to_i
+        self.height = dest_height.to_i
         save!
         outsize = "-outsize #{dest_width.to_i} #{dest_height.to_i}"
       else
@@ -123,7 +125,7 @@ class Map < ActiveRecord::Base
 
       self.filename = tiffed_filename
       #now delete the original
-      logger.debug "Deleting uploaded file, now it's a usable tif"
+      logger.info "Deleting uploaded file, now it's a usable tif"
       if File.exists?(self.upload.path)
         logger.debug "deleted uploaded file"
         File.delete(self.upload.path)
