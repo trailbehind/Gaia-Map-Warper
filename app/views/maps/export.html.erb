@@ -26,7 +26,7 @@
     Gaia GPS URL: <%=link_to "Gaia", gaia_url %>
   </li>
 <li>
-  <% otmurl = url_for(:controller => "maps", :action => "otm_url", :id => @map, :only_path => false) %>
-    Offline Topo Maps URL: <%=link_to "OTM", gaia_url %>
+  <% otm_url = url_for(:controller => "maps", :action => "otm_url", :id => @map, :only_path => false) %>
+    Offline Topo Maps URL: <%=link_to "OTM", otm_url %>
   </li>
 </ul>
