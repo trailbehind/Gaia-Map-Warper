@@ -201,6 +201,10 @@ class MapsController < ApplicationController
     @current_tab = "export"
     @selected_tab = 6
     @html_title = "Export Map" + @map.id.to_s
+
+    @gaia_url = "gaiagps://addmapsource/" + CGI::escape(@map.title.to_s + "^^" + url_for(:controller => "maps", :action => "tile", :x => "XPARAM", :y => "YPARAM", :z => "ZPARAM", :only_path => false) + "^^" + @map.gaia_url())
+    @otm_url = "otm://addmapsource/" + CGI::escape(@map.title.to_s + "^^" + url_for(:controller => "maps", :action => "tile", :x => "XPARAM", :y => "YPARAM", :z => "ZPARAM", :only_path => false) + "^^" + @map.gaia_url())
+
     unless @map.status == :warped && @map.map_type == :is_map
       flash.now[:notice] = "Map needs to be rectified before being able to be exported"
     end

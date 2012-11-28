@@ -22,11 +22,9 @@
     Tiles (Google/OSM scheme): <%=link_to "Tiles base URL", tile_url %>
   </li>
 <li>
-  <% gaia_url = url_for(:controller => "maps", :action => "gaia_url", :id => @map, :only_path => false) %>
-    Gaia GPS URL: <%=link_to "Gaia", gaia_url %>
+    Gaia GPS URL: <%=link_to "Gaia", @gaia_url %>
   </li>
 <li>
-  <% otm_url = url_for(:controller => "maps", :action => "otm_url", :id => @map, :only_path => false) %>
-    Offline Topo Maps URL: <%=link_to "OTM", otm_url %>
+    Offline Topo Maps URL: <%=link_to "OTM", @otm_url %>
   </li>
 </ul>

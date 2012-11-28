@@ -181,7 +181,6 @@ class Map < ActiveRecord::Base
       self.touch(:gcp_touched_at)
   end
 
-
   #############################################
   #ACCESSOR METHODS
   #############################################
