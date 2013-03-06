@@ -22,7 +22,7 @@ public/uploads/*
 !public/uploads/thumb
 rbeautify.rb
 *.*~
-
+.DS_Store
 
 
 
