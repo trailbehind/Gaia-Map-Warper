@@ -54,9 +54,9 @@ class Map < ActiveRecord::Base
   #CUSTOM VALIDATIONS
   #############################################
 
-  def validate_on_create
-    errors.add(:filename, "is already being used") if Map.find_by_upload_file_name(upload.original_filename)
-  end
+  #def validate_on_create
+  #  errors.add(:filename, "is already being used") if Map.find_by_upload_file_name(upload.original_filename)
+  #end
 
 
   #############################################
@@ -101,6 +101,9 @@ class Map < ActiveRecord::Base
       orig_ext = File.extname(self.upload_file_name).to_s.downcase
     
       tiffed_filename = (orig_ext == ".tif" || orig_ext == ".tiff")? self.upload_file_name : self.upload_file_name + ".tif"
+      
+      tiffed_filename = ActiveSupport::SecureRandom.hex(16).to_s + "_" + tiffed_filename
+
       tiffed_file_path = File.join(maps_dir , tiffed_filename)
 
       logger.info "We convert to tiff"
