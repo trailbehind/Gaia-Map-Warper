@@ -109,13 +109,16 @@ class Map < ActiveRecord::Base
       logger.info "We convert to tiff"
       # -co compress=DEFLATE for compression?
       # -expand rgb   for tifs with LZW compression. sigh
-      command  = "#{GDAL_PATH}gdal_translate #{self.upload.path} #{outsize} -co PHOTOMETRIC=RGB -co PROFILE=BASELINE #{tiffed_file_path}"
+      #command  = "#{GDAL_PATH}gdal_translate #{self.upload.path} #{outsize} -co PHOTOMETRIC=RGB -co PROFILE=BASELINE #{tiffed_file_path}"
+      # phtometric should be autodetected in gdal, forcing to RGB breaks gif uploads.
+      command  = "#{GDAL_PATH}gdal_translate #{self.upload.path} #{outsize} -co COMPRESS=DEFLATE -co PROFILE=BASELINE #{tiffed_file_path}"
       logger.info command
       ti_stdin, ti_stdout, ti_stderr =  Open3::popen3( command )
       logger.info ti_stdout.readlines.to_s
       logger.info ti_stderr.readlines.to_s
 
-      command = "#{GDAL_PATH}gdaladdo -r average #{tiffed_file_path} 2 4 8 16 32 64"
+      #command = "#{GDAL_PATH}gdaladdo -r average #{tiffed_file_path} 2 4 8 16 32 64"
+      command = "#{GDAL_PATH}gdaladdo -r cubic --config COMPRESS_OVERVIEW DEFLATE #{tiffed_file_path} 2 4 8 16 32 64"
       o_stdin, o_stdout, o_stderr = Open3::popen3(command)
       logger.info command
 
@@ -600,7 +603,8 @@ class Map < ActiveRecord::Base
     memory_limit =  (defined?(GDAL_MEMORY_LIMIT)) ? "-wm "+GDAL_MEMORY_LIMIT.to_s :  ""
 
     #check for colorinterop=pal ? -disnodata 255 or -dstalpha
-    command = "#{GDAL_PATH}gdalwarp #{memory_limit}  #{transform_option}  #{resample_option} -dstalpha #{mask_options} -s_srs 'EPSG:4326' #{temp_filename}.vrt #{dest_filename} -co TILED=YES"
+    #command = "#{GDAL_PATH}gdalwarp #{memory_limit}  #{transform_option}  #{resample_option} -dstalpha #{mask_options} -s_srs 'EPSG:4326' #{temp_filename}.vrt #{dest_filename} -co TILED=YES"
+    command = "#{GDAL_PATH}gdalwarp #{memory_limit}  #{transform_option}  #{resample_option} -dstalpha #{mask_options} -s_srs 'EPSG:4326' #{temp_filename}.vrt #{dest_filename} -co TILED=YES -co COMPRESS=DEFLATE"
     w_stdin, w_stdout, w_stderr = Open3::popen3(command)
     logger.info command
 
@@ -616,7 +620,7 @@ class Map < ActiveRecord::Base
       warp_output = w_out
 
       # gdaladdo
-    command = "#{GDAL_PATH}gdaladdo -r average #{dest_filename} 2 4 8 16 32 64"
+    command = "#{GDAL_PATH}gdaladdo -r cubic --config COMPRESS_OVERVIEW DEFLATE #{dest_filename} 2 4 8 16 32 64"
       o_stdin, o_stdout, o_stderr = Open3::popen3(command)
       logger.info command
 
