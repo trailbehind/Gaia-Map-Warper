@@ -265,7 +265,8 @@ class MapsController < ApplicationController
 
       #we'll use POSIX regular expression for searches    ~*'( |^)robinson([^A-z]|$)' and to strip out brakets etc  ~*'(:punct:|^|)plate 6([^A-z]|$)';
     if @query && @query.strip.length > 0 && @field
-        conditions = ["#{@field}  ~* ?", '(:punct:|^|)'+@query+'([^A-z]|$)']
+        #conditions = ["#{@field}  ~* ?", '(:punct:|^|)'+@query+'([^A-z]|$)']
+        conditions = ["#{@field} LIKE ?", '%'+@query+'%']
       else
         conditions = nil
       end
