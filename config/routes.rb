@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.authorize '/oauth/authorize', :controller => 'oauth', :action => 'authorize'
   map.oauth '/oauth', :controller => 'oauth', :action => 'index'
 
-  map.root :controller => "home", :action => "index"
+  map.root :controller => "redirect", :url => 'http://warper.mapstory.org/'
   
   map.user_activity '/users/:id/activity', :controller => 'audits', :action => 'for_user'
   map.formatted_user_activity '/users/:id/activity.:format', :controller => 'audits', :action => 'for_user'
@@ -139,6 +139,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   #map.connect '', :controller => "mapscans"
-  map.connect '', :controller => "home"
+  map.connect '', :controller => "redirect", :url => 'http://warper.mapstory.org/'
 
 end
